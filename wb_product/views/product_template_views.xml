@@ -1,0 +1,119 @@
+<odoo>
+  <data>
+    <record  id="product_template_form_inherit" model="ir.ui.view">
+      <field name="name">product_template_inherit</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_form_view"/>
+      <field name="arch" type="xml">
+          <!-- Agrega campos a la página Inventario -->
+          <xpath expr="//group[@name='group_lots_and_weight']" position="after">
+              <!-- MEDIDAS DE PRODUCTO -->
+              <group string="Medidas de Producto">
+                  <label for="product_length"/>
+                  <div class="o_row" name="product_length">
+                    <field name="product_length"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="product_height"/>
+                  <div class="o_row" name="product_height">
+                    <field name="product_height"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="product_width"/>
+                  <div class="o_row" name="product_width">
+                    <field name="product_width"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="product_weight"/>
+                  <div class="o_row" name="product_weight">
+                    <field name="product_weight"/>
+                    <span>kg</span>
+                  </div>
+                  <label for="product_volume"/>
+                  <div class="o_row" name="product_volume">
+                    <field name="product_volume"/>
+                  </div>
+                  <field name="packages_number"/>
+              </group>
+          </xpath>
+          <xpath expr="//group[@name='group_lots_and_weight']" position="after">
+              <!-- MEDIDAS DE EMPAQUE -->
+              <group string="Medidas de Empaque">
+                  <label for="packing_length"/>
+                  <div class="o_row" name="packing_length">
+                    <field name="packing_length"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="packing_height"/>
+                  <div class="o_row" name="packing_height">
+                    <field name="packing_height"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="packing_width"/>
+                  <div class="o_row" name="packing_width">
+                    <field name="packing_width"/>
+                    <span>cm</span>
+                  </div>
+                  <label for="packing_weight"/>
+                  <div class="o_row" name="packing_weight">
+                    <field name="packing_weight"/>
+                    <span>kg</span>
+                  </div>
+              </group>
+          </xpath>
+          <!-- Agrega campos a la pagina Información General -->
+          <xpath expr="//group[@name='group_standard_price']" position="after">
+              <group string="Comercial" name="comercial">
+                <field name="buyer"/>
+                <field name="owner"/>
+                <field name="internal_category"/>
+                <field name="brand"/>
+              </group>
+              <group string="Costos" invisible="context.get('product.product', True)">
+                  <field name="previous_cost" widget='monetary'/>
+              </group>
+          </xpath>
+          <notebook>
+          <!-- Agrega una nueva página al formulario llamada Logística -->
+            <page name="logistica" string="Logística">
+              <group>
+                  <group string="Logística">
+                      <field name="nacional_import"/>
+                  </group>
+              </group>
+            </page>
+          <!-- Agrega una nueva página al formulario llamada Planificación -->
+            <page name="planning" string="Planificación">
+              <group>
+                  <group string="Estatus y Etiquetas" name="status">
+                      <field name="status"/>
+                      <field name="substatus"/>
+                  </group>
+                  <group string="Stock" invisible="context.get('product.product', True)">
+                      <field name="stock_real" />
+                      <field name="stock_urrea"/>
+                  </group>
+              </group>
+            </page>
+          <!-- Agrega una nueva página al formulario llamada Markets -->
+            <page string="Markets">
+                <group>
+                    <group string="Mercado Libre">
+                        <field name="mlm_ventas"/>
+                        <field name="full_api_ventas"/>
+                        <field name="stock_full_ventas"/>
+                        <field name="mlm_oficiales"/>
+                        <field name="full_api_oficiales"/>
+                        <field name="stock_full_oficiales"/>
+                    </group>
+                    <group string="Esquema deseado">
+                        <field name="full_ventas"/>
+                        <field name="full_oficiales"/>
+                    </group>
+                </group>
+            </page>
+          </notebook>
+      </field>
+    </record>
+  </data>
+</odoo>
